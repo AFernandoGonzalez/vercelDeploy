@@ -3,11 +3,11 @@ const app = express();
 
 function setupApp() {
     // Your app setup here
-    app.get('/', (req, res) => {
+    app.get('/api', (req, res) => {
         res.send('Hello from the app!');
     });
 
-    app.get('/api', (req, res) => {
+    app.get('/api/v1', (req, res) => {
         res.send('api path is working!');
     });
 
