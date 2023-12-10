@@ -7,7 +7,10 @@ function setupApp() {
         res.send('Hello from the app!');
     });
 
-    // More routes and middleware...
+    app.get('/api', (req, res) => {
+        res.send('api path is working!');
+    });
+
 
     return app;
 }
