@@ -1,16 +1,20 @@
-const express = require('express');
-const app = express();
+const app = require('express')();
+const { v4 } = require('uuid');
 
-function setupApp() {
-    // Your app setup here
+
+const setupApp = () => {
     app.get('/api', (req, res) => {
-        res.send('Hello from the app!');
+        const path = `/api/item/${v4()}`;
+        res.setHeader('Content-Type', 'text/html');
+        res.setHeader('Cache-Control', 's-max-age=1, stale-while-revalidate');
+        res.end(`Hello! Go to item: <a href="${path}">${path}</a>`);
     });
 
-    app.get('/api/v1', (req, res) => {
-        res.send('api path is working!');
-    });
 
+    app.get('/api/item/:slug', (req, res) => {
+        const { slug } = req.params;
+        res.end(`Item: ${slug}`);
+    });
 
     return app;
 }
